@@ -427,7 +427,7 @@ MIT © [Gydunhn](https://github.com/gydunhn)
 
 ## 📮 Soporte
 
-- 📦 [npm package](https://www.npmjs.com/package/rut-validator)
+- 📦 [npm package](https://www.npmjs.com/package/@gydunhn/rut-validator)
 
 ---
 
