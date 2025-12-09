@@ -1,18 +1,14 @@
-//src/index.ts
-
+// src/index.ts
 /**
- * Implementamos los metodos de rut.util.ts, para poder usarlos en Proyectos Angular, VueJS o Typescript
+ * Exportamos todos los métodos de rut.util.ts
+ * Validador de RUT chileno completo con TypeScript
  */
 
 export {
   calculateRutVerifier,
-  cleanRut,
-  completeRut,
-  deconstructRut,
-  formatRut,
-  isDigitsValid,
-  isSuspiciousRut,
-  validateRutDigitsOnly,
-  validateRutFull,
-  type RutFormat,
+  cleanRut, clearCache, compareRuts, completeRut,
+  deconstructRut, extractDigits,
+  extractVerifier, formatRut, generateRandomRut, hasRutStructure, isDigitsValid,
+  isSuspiciousRut, maskRutInput, normalizeRut, RutUtils, validateRutDigitsOnly,
+  validateRutFull, type RutFormat
 } from "./rut.util";
