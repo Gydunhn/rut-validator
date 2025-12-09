@@ -1,30 +1,34 @@
-import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import terser from "@rollup/plugin-terser";
-import typescript from "@rollup/plugin-typescript";
-import ts from "typescript";
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
+import ts from 'typescript';
 
 export default {
-  input: "src/index.ts",
+  input: 'src/index.ts',
   output: [
     {
-      file: "dist/index.js",
-      format: "cjs",
-      sourcemap: true,
+      file: 'dist/index.js',
+      format: 'cjs',
+      sourcemap: true
     },
     {
-      file: "dist/index.mjs",
-      format: "esm",
-      sourcemap: true,
-    },
+      file: 'dist/index.mjs',
+      format: 'esm',
+      sourcemap: true
+    }
   ],
   plugins: [
     resolve(),
     commonjs(),
     typescript({
-      tsconfig: "./tsconfig.json",
+      tsconfig: './tsconfig.json',
       typescript: ts,
+      declaration: true,
+      declarationDir: 'dist',
+      rootDir: 'src',
+      exclude: ['**/*.test.ts', '**/__tests__/**']
     }),
-    terser(),
-  ],
+    terser()
+  ]
 };

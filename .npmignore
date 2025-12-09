@@ -1,0 +1,30 @@
+# Archivos de desarrollo y configuración
+src/
+.vscode/
+.eslintignore
+.prettierignore
+.editorconfig
+jest.config.cjs
+rollup.config.js
+eslint.config.js
+tsconfig.json
+.eslintrc.json
+.prettierrc.json
+
+# Archivos de pruebas y configuración de pruebas
+coverage/
+dist/__tests__/
+__tests__/
+*.test.ts
+*.test.js
+
+# Archivos de node_modules y logs
+node_modules/
+logs
+*.log
+
+# Archivos de configuración de IDE
+.idea/
+.vscode/
+*.swp
+*.swo
