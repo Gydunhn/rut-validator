@@ -15,7 +15,7 @@ Validador de RUT chileno ligero, sin dependencias y confiable. Implementa el alg
 - 🔢 **Cálculo automático de DV** - Genera el dígito verificador cuando lo necesites
 - 🧹 **Formateo automático** - Transforma cualquier formato a `12.345.678-9`
 - 🛡️ **Detección de patrones sospechosos** - Rechaza `11.111.111-1` y similares
-- 📦 **Zero dependencias** - Bundle pequeño y rápido (1.5KB minificado)
+- 📦 **Zero dependencias** - Bundle pequeño y rápido
 - 🌐 **Universal** - CommonJS (dist/index.js) y ES Modules (dist/index.mjs)
 - 💪 **TypeScript nativo** - Tipos incluidos out-of-the-box
 - 🎯 **Soporte amplio de RUTs** - Desde 800.000 hasta 99.999.999
