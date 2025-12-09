@@ -40,7 +40,7 @@ pnpm add @gydunhn/rut-validator
 ```
 
 ```bash
-npm install @gydunhn/rut-validator
+npm install @gydunhn/rut-validator --legacy-peer-deps
 ```
 
 ```bash
