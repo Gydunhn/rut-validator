@@ -1,7 +1,7 @@
 {
   "name": "@gydunhn/rut-validator",
   "version": "1.0.0",
-  "description": "Validador de RUT chileno ligero y sin dependencias. Compatible con Angular, React, Vue, Node.js y navegadores.",
+  "description": "Validador de RUT chileno ligero y sin dependencias.",
   "author": "Gydunhn",
   "type": "module",
   "packageManager": "pnpm@10.11.1",
