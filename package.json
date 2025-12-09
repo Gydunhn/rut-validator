@@ -37,10 +37,27 @@
     "ci": "npm run format:check && npm run lint && npm test && npm run build"
   },
   "keywords": [
+    "run",
+    "rut",
+    "validator",
+    "verifier",
+    "cl",
+    "chile",
+    "chilean",
+    "modulo11",
+    "identificacion",
+    "cedula",
+    "validation",
+    "format",
+    "js",
+    "ts",
+    "utils",
+    "utilities",
     "utilidades",
     "angular",
     "vue",
-    "react"
+    "react",
+    "gydunhn"
   ],
   "license": "MIT",
   "repository": {
