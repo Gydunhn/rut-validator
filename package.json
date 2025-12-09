@@ -1,0 +1,53 @@
+{
+  "name": "@gydunhn/rut-validator",
+  "version": "1.0.0",
+  "description": "Validador de RUT chileno ligero y sin dependencias. Compatible con Angular, React, Vue, Node.js y navegadores.",
+  "author": "Gydunhn",
+  "main": "dist/index.js",
+  "type": "module",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "packageManager": "pnpm@10.11.1",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "prepublishOnly": "npm run lint && npm test && npm run build",
+    "ci": "npm run format:check && npm run lint && npm test && npm run build"
+  },
+  "keywords": [
+    "utilidades",
+    "angular",
+    "vue",
+    "react"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gydunhn/rut-validator.git"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.9",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@types/jest": "^30.0.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "jest": "^30.2.0",
+    "prettier": "^3.7.4",
+    "rollup": "^4.53.3",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "typescript-eslint": "^8.49.0"
+  }
+}
