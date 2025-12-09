@@ -1,15 +1,31 @@
 {
   "name": "@gydunhn/rut-validator",
   "version": "1.0.0",
-  "description": "Validador de RUT chileno ligero y sin dependencias. Compatible con Angular, React, Vue, Node.js y navegadores.",
+  "description": "Validador de RUT chileno ligero y sin dependencias.",
   "author": "Gydunhn",
-  "main": "dist/index.js",
   "type": "module",
+  "packageManager": "pnpm@10.11.1",
+  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "packageManager": "pnpm@10.11.1",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
   "scripts": {
     "build": "rollup -c",
+    "bundle": "npm run build && npm pack",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -17,14 +33,31 @@
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
-    "prepublishOnly": "npm run lint && npm test && npm run build",
+    "prepublishOnly": "npm run build",
     "ci": "npm run format:check && npm run lint && npm test && npm run build"
   },
   "keywords": [
+    "run",
+    "rut",
+    "validator",
+    "verifier",
+    "cl",
+    "chile",
+    "chilean",
+    "modulo11",
+    "identificacion",
+    "cedula",
+    "validation",
+    "format",
+    "js",
+    "ts",
+    "utils",
+    "utilities",
     "utilidades",
     "angular",
     "vue",
-    "react"
+    "react",
+    "gydunhn"
   ],
   "license": "MIT",
   "repository": {
@@ -32,6 +65,7 @@
     "url": "https://github.com/gydunhn/rut-validator.git"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@rollup/plugin-commonjs": "^28.0.9",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -45,9 +79,7 @@
     "rollup": "^4.53.3",
     "ts-jest": "^29.4.6",
     "tslib": "^2.8.1",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.49.0"
   }
 }
