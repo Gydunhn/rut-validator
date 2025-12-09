@@ -3,11 +3,19 @@
 import {
   calculateRutVerifier,
   cleanRut,
+  clearCache,
+  compareRuts,
   completeRut,
   deconstructRut,
+  extractDigits,
+  extractVerifier,
   formatRut,
+  generateRandomRut,
+  hasRutStructure,
   isDigitsValid,
   isSuspiciousRut,
+  maskRutInput,
+  normalizeRut,
   validateRutDigitsOnly,
   validateRutFull
 } from '../rut.util';
@@ -21,7 +29,7 @@ describe('RUT Utils', () => {
     });
     it('debe preservar la K mayúscula', () => {
       expect(cleanRut('800.000-K')).toBe('800000K');
-      expect(cleanRut('800000-k')).toBe('800000k');
+      expect(cleanRut('800000-k')).toBe('800000K');
     });
     it('debe manejar strings vacíos', () => {
       expect(cleanRut('')).toBe('');
@@ -197,6 +205,97 @@ describe('RUT Utils', () => {
       const completed = completeRut(digits);
       expect(completed).toBe('12.345.678-5');
       expect(validateRutFull(completed!)).toBe(true);
+    });
+  });
+
+  describe('normalizeRut', () => {
+    it('debe normalizar RUTs con diferentes formatos', () => {
+      expect(normalizeRut('12345678')).toBe('12.345.678-5');
+      expect(normalizeRut('12.345.678-5')).toBe('12.345.678-5');
+      expect(normalizeRut('123456785')).toBe('12.345.678-5');
+    });
+  });
+
+  describe('maskRutInput', () => {
+    it('debe formatear mientras se escribe', () => {
+      // 1-7 dígitos: solo puntos
+      expect(maskRutInput('1')).toBe('1');
+      expect(maskRutInput('12')).toBe('12');
+      expect(maskRutInput('123')).toBe('123');
+      expect(maskRutInput('1234')).toBe('1.234');
+      expect(maskRutInput('12345')).toBe('12.345');
+      expect(maskRutInput('123456')).toBe('123.456');
+      expect(maskRutInput('1234567')).toBe('1.234.567');
+
+      // 8 dígitos exactos: solo puntos (sin guión, no asume DV)
+      expect(maskRutInput('12345678')).toBe('12.345.678');
+
+      // 9+ caracteres: asume último es DV
+      expect(maskRutInput('123456785')).toBe('12.345.678-5');
+      expect(maskRutInput('123456789')).toBe('12.345.678-9');
+      expect(maskRutInput('800000K')).toBe('800.000-K');
+      expect(maskRutInput('8000000K')).toBe('8.000.000-K');
+
+      // Casos con letras mezcladas
+      expect(maskRutInput('12a34b56c78d5')).toBe('12.345.678-5');
+    });
+  });
+
+  describe('generateRandomRut', () => {
+    it('debe generar RUTs válidos', () => {
+      const rut = generateRandomRut();
+      expect(validateRutFull(rut)).toBe(true);
+    });
+  });
+
+  describe('extractDigits', () => {
+    it('debe extraer solo los dígitos del RUT', () => {
+      expect(extractDigits('12.345.678-5')).toBe('12345678');
+      expect(extractDigits('800000-K')).toBe('800000');
+      expect(extractDigits('')).toBe('');
+    });
+  });
+
+  describe('extractVerifier', () => {
+    it('debe extraer solo el dígito verificador', () => {
+      expect(extractVerifier('12.345.678-5')).toBe('5');
+      expect(extractVerifier('800000-K')).toBe('K');
+      expect(extractVerifier('12345678')).toBe('');
+    });
+  });
+
+  describe('hasRutStructure', () => {
+    it('debe detectar estructura básica de RUT', () => {
+      expect(hasRutStructure('12.345.678-5')).toBe(true);
+      expect(hasRutStructure('123')).toBe(true);
+      expect(hasRutStructure('abc')).toBe(false);
+      expect(hasRutStructure('')).toBe(false);
+    });
+  });
+
+  describe('compareRuts', () => {
+    it('debe comparar RUTs ignorando formato', () => {
+      console.log('=== DEBUG compareRuts ===');
+      console.log('Test 1: 12345678 vs 12.345.678-5');
+      console.log('normalizeRut("12345678", "nodash"):', normalizeRut('12345678', 'nodash'));
+      console.log('normalizeRut("12.345.678-5", "nodash"):', normalizeRut('12.345.678-5', 'nodash'));
+      console.log('Son iguales?:', normalizeRut('12345678', 'nodash') === normalizeRut('12.345.678-5', 'nodash'));
+
+      console.log('\nTest 2: 12.345.678-5 vs 12345678-5');
+      console.log('normalizeRut("12.345.678-5", "nodash"):', normalizeRut('12.345.678-5', 'nodash'));
+      console.log('normalizeRut("12345678-5", "nodash"):', normalizeRut('12345678-5', 'nodash'));
+
+      expect(compareRuts('12.345.678-5', '12345678-5')).toBe(true);
+      expect(compareRuts('12345678', '12.345.678-5')).toBe(true); // Este falla
+      expect(compareRuts('800000-K', '800.000-K')).toBe(true);
+      expect(compareRuts('12345678', '87654321')).toBe(false);
+    });
+  });
+
+  describe('clearCache', () => {
+    it('debe limpiar el cache sin errores', () => {
+      // Ejecutar para verificar que no lance excepciones
+      expect(() => clearCache()).not.toThrow();
     });
   });
 });
